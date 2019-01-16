@@ -1,0 +1,444 @@
+<html>
+
+  <body>
+  
+  <style>
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+/* set global font to Open Sans */
+body {
+  font-family: 'Open Sans', 'sans-serif';
+  background-image: url(http://benague.ca/files/pw_pattern.png);
+}
+
+/* header */
+h1 {
+  color: #55acee;
+  text-align: center;
+}
+
+/* header/copyright link */
+.link {
+  text-decoration: none;
+  color: #55acee;
+  border-bottom: 2px dotted #55acee;
+  transition: .3s;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  cursor: url(http://cur.cursors-4u.net/symbols/sym-1/sym46.cur), auto;
+}
+
+.link:hover {
+  color: #2ecc71;
+  border-bottom: 2px dotted #2ecc71;
+}
+
+/* button div */
+#buttons {
+  padding-top: 20px;
+  text-align: center;
+}
+
+/* start da css for da buttons */
+.btn {
+  border-radius: 5px;
+  padding: 1px 10px;
+  font-size: 18px;
+  text-decoration: none;
+  margin: 10px;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+}
+
+.btn:active {
+  transform: translate(0px, 5px);
+  -webkit-transform: translate(0px, 5px);
+  box-shadow: 0px 1px 0px 0px;
+}
+
+.blue {
+  background-color: #55acee;
+  box-shadow: 0px 5px 0px 0px #3C93D5;
+}
+
+.blue:hover {
+  background-color: #6FC6FF;
+}
+
+.green {
+  background-color: #2ecc71;
+  box-shadow: 0px 5px 0px 0px #15B358;
+}
+
+.green:hover {
+  background-color: #48E68B;
+}
+
+.red {
+  background-color: #e74c3c;
+  box-shadow: 0px 5px 0px 0px #CE3323;
+}
+
+.red:hover {
+  background-color: #FF6656;
+}
+
+.purple {
+  background-color: #9b59b6;
+  box-shadow: 0px 5px 0px 0px #82409D;
+}
+
+.purple:hover {
+  background-color: #B573D0;
+}
+
+.orange {
+  background-color: #e67e22;
+  box-shadow: 0px 5px 0px 0px #CD6509;
+}
+
+.orange:hover {
+  background-color: #FF983C;
+}
+
+.yellow {
+  background-color: #f1c40f;
+  box-shadow: 0px 5px 0px 0px #D8AB00;
+}
+
+.yellow:hover {
+  background-color: #FFDE29;
+}
+
+/* copyright stuffs.. */
+p {
+  text-align: center;
+  color: #55acee;
+  padding-top: 0px;
+}
+  </style>
+
+   <!-- <head></head>
+    <h1>Made by: <a href="http://www.google.com" target="_blank" class="link">Me</a></h1>
+-->
+    
+    <div id="buttons">
+  <a href="#" onclick="meadd()" class="btn blue">Nash +</a>
+      <a href="#" onclick="youadd()" class="btn blue">Asmaa +</a>
+      <a href="#" onclick="theyadd()" class="btn blue">Sherif +</a>
+      <a href="#" onclick="weadd()" class="btn blue">Yousef +</a>
+      <a href="#" onclick="ouradd()" class="btn blue">Ghweil +</a>
+      <a href="#" onclick="youradd()" class="btn blue">Kholoud +</a>
+</div>
+
+
+      <!--
+    <p>
+      <button onclick="meadd()">Nash+</button>
+      <button onclick="youadd()">Asmaa+</button>
+      <button onclick="theyadd()">Sherif+</button>
+      <button onclick="weadd()">Yousef+</button>
+      <button onclick="ouradd()">Ghweil+</button>
+    </p>
+
+    <p>
+      <button onclick="mesub()">Nash-</button>
+      <button onclick="yousub()">Asmaa-</button>
+      <button onclick="theysub()">Sherif-</button>
+      <button onclick="wesub()">Yousef-</button>
+      <button onclick="oursub()">Ghweil-</button>
+    </p>
+  -->
+
+    <p id="TEST"></p>
+    <p id="TEST2"></p>
+    <p id="TEST3"></p>
+    <p id="TEST4"></p>
+    <p id="TEST5"></p>
+    <p id="TEST6"></p>
+    <p id="sort"></p>
+    <p id="outContainer"></p>
+    <p><br></p>
+    <p><br></p>
+    <p> </p>
+    <p> </p>
+    
+            <div id="buttons">
+      <a href="#" onclick="mesub()" class="btn red">Nash -</a>
+      <a href="#" onclick="yousub()" class="btn red">Asmaa -</a>
+      <a href="#" onclick="theysub()" class="btn red">Sherif -</a>
+      <a href="#" onclick="wesub()" class="btn red">Yousef -</a>
+      <a href="#" onclick="oursub()" class="btn red">Ghweil -</a>
+      <a href="#" onclick="yoursub()" class="btn red">Kholoud -</a>
+</div>
+
+<script>
+      x = 0;
+      y = 0;
+      z = 0;
+      v = 0;
+      n = 0;
+      h = 0;
+
+      function PriorityQueue() {
+        var collection = [];
+        this.printCollection = function() {
+          var elem = document.getElementById("outContainer");
+          elem.innerHTML = "Ticket Queue<br><br>"; // cleanup
+          collection.forEach(function(value) {
+
+            elem.innerHTML += (value[0] + " - " + value[1] + " Ticket(s) <br>");
+          });
+        };
+        this.enqueue = function(element) {
+          if (this.isEmpty()) {
+            collection.push(element);
+          } else {
+            var added = false;
+            for (var i = 0; i < collection.length; i++) {
+              if (element[1] < collection[i][1]) { //checking priorities
+                collection.splice(i, 0, element);
+                added = true;
+                break;
+              }
+            }
+            if (!added) {
+              collection.push(element);
+            }
+          }
+        };
+        this.dequeue = function() {
+          var value = collection.shift();
+          return value[0];
+        };
+        this.front = function() {
+          return collection[0];
+        };
+        this.size = function() {
+          return collection.length;
+        };
+        this.isEmpty = function() {
+          return (collection.length === 0);
+        };
+      }
+
+      function meadd() {
+        x = x + 1;
+        //alert(" Nash has been assigned " + x + "Ticket(s)" );
+        document.getElementById("TEST").innerHTML =
+          "Nash has been assigned " + x + " Ticket(s)";
+        var points = [x, y, z, v, n, h];
+        document.getElementById("sort").innerHTML = points;
+        var pq = new PriorityQueue();
+        pq.enqueue(['Nash', x]);
+        pq.enqueue(['Asmaa', y]);
+        pq.enqueue(['Sherif', z]);
+        pq.enqueue(['Yousef', v]);
+        pq.enqueue(['Ghweil', n]);
+        pq.enqueue(['Kholoud', h]);
+        pq.printCollection();
+        //pq.dequeue();
+        //console.log(pq.front());
+        //pq.printCollection();
+      }
+
+      function mesub() {
+        x = x - 1;
+        //alert(" Nash has been assigned " + x + "Ticket(s)" );
+        document.getElementById("TEST").innerHTML =
+          "Nash has been assigned " + x + " Ticket(s)";
+        var points = [x, y, z, v, n, h];
+        document.getElementById("sort").innerHTML = points;
+        var pq = new PriorityQueue();
+        pq.enqueue(['Nash', x]);
+        pq.enqueue(['Asmaa', y]);
+        pq.enqueue(['Sherif', z]);
+        pq.enqueue(['Yousef', v]);
+        pq.enqueue(['Ghweil', n]);
+        pq.enqueue(['Kholoud', h]);
+        pq.printCollection();
+        //pq.dequeue();
+        //console.log(pq.front());
+        //pq.printCollection();
+      }
+
+
+      function youadd() {
+        y = y + 1;
+        //alert(" Asmaa has been assigned " + y + " Ticket(s)" );
+        document.getElementById("TEST2").innerHTML =
+          "Asmaa has been assigned " + y + "Ticket(s)";
+        var points = [x, y, z, v, n, h];
+        document.getElementById("sort").innerHTML = points;
+        var pq2 = new PriorityQueue();
+        pq2.enqueue(['Nash', x]);
+        pq2.enqueue(['Asmaa', y]);
+        pq2.enqueue(['Sherif', z]);
+        pq2.enqueue(['Yousef', v]);
+        pq2.enqueue(['Ghweil', n]);
+        pq2.enqueue(['Kholoud', h]);
+        pq2.printCollection();
+      }
+
+      function yousub() {
+        y = y - 1;
+        //alert(" Asmaa has been assigned " + y + " Ticket(s)" );
+        document.getElementById("TEST2").innerHTML =
+          "Asmaa has been assigned " + y + "Ticket(s)";
+        var points = [x, y, z, v, n, h];
+        document.getElementById("sort").innerHTML = points;
+        var pq2 = new PriorityQueue();
+        pq2.enqueue(['Nash', x]);
+        pq2.enqueue(['Asmaa', y]);
+        pq2.enqueue(['Sherif', z]);
+        pq2.enqueue(['Yousef', v]);
+        pq2.enqueue(['Ghweil', n]);
+        pq2.enqueue(['Kholoud', h]);
+        pq2.printCollection();
+      }
+
+
+      function theyadd() {
+        z = z + 1;
+        //alert(" Sherif has been assigned " + x + "Ticket(s)" );
+        document.getElementById("TEST3").innerHTML =
+          "Sherif has been assigned " + z + " Ticket(s)";
+        var points = [x, y, z, v, n, h];
+        document.getElementById("sort").innerHTML = points;
+        var pq3 = new PriorityQueue();
+        pq3.enqueue(['Nash', x]);
+        pq3.enqueue(['Asmaa', y]);
+        pq3.enqueue(['Sherif', z]);
+        pq3.enqueue(['Yousef', v]);
+        pq3.enqueue(['Ghweil', n]);
+        pq3.enqueue(['Kholoud', h]);
+        pq3.printCollection();
+      }
+
+      function theysub() {
+        z = z - 1;
+        //alert(" Sherif has been assigned " + x + "Ticket(s)" );
+        document.getElementById("TEST3").innerHTML =
+          "Sherif has been assigned " + z + " Ticket(s)";
+        var points = [x, y, z, v, n, h];
+        document.getElementById("sort").innerHTML = points;
+        var pq3 = new PriorityQueue();
+        pq3.enqueue(['Nash', x]);
+        pq3.enqueue(['Asmaa', y]);
+        pq3.enqueue(['Sherif', z]);
+        pq3.enqueue(['Yousef', v]);
+        pq3.enqueue(['Ghweil', n]);
+        pq3.enqueue(['Kholoud', h]);
+        pq3.printCollection();
+      }
+
+      function weadd() {
+        v = v + 1;
+        //alert(" Nash has been assigned " + x + "Ticket(s)" );
+        document.getElementById("TEST4").innerHTML =
+          "Yousef has been assigned " + v + " Ticket(s)";
+        var points = [x, y, z, v, n, h];
+        document.getElementById("sort").innerHTML = points;
+        var pq4 = new PriorityQueue();
+        pq4.enqueue(['Nash', x]);
+        pq4.enqueue(['Asmaa', y]);
+        pq4.enqueue(['Sherif', z]);
+        pq4.enqueue(['Yousef', v]);
+        pq4.enqueue(['Ghweil', n]);
+        pq4.enqueue(['Kholoud', h]);
+        pq4.printCollection();
+      }
+
+      function wesub() {
+        v = v - 1;
+        //alert(" Nash has been assigned " + x + "Ticket(s)" );
+        document.getElementById("TEST4").innerHTML =
+          "Yousef has been assigned " + v + " Ticket(s)";
+        var points = [x, y, z, v, n, h];
+        document.getElementById("sort").innerHTML = points;
+        var pq4 = new PriorityQueue();
+        pq4.enqueue(['Nash', x]);
+        pq4.enqueue(['Asmaa', y]);
+        pq4.enqueue(['Sherif', z]);
+        pq4.enqueue(['Yousef', v]);
+        pq4.enqueue(['Ghweil', n]);
+        pq4.enqueue(['Kholoud', h]);
+        pq4.printCollection();
+      }
+
+      function ouradd() {
+        n = n + 1;
+        //alert(" Nash has been assigned " + n + "Ticket(s)" );
+        document.getElementById("TEST5").innerHTML =
+          "Ghweil has been assigned " + n + " Ticket(s)";
+        var points = [x, y, z, v, n, h];
+        document.getElementById("sort").innerHTML = points;
+        var pq5 = new PriorityQueue();
+        pq5.enqueue(['Nash', x]);
+        pq5.enqueue(['Asmaa', y]);
+        pq5.enqueue(['Sherif', z]);
+        pq5.enqueue(['Yousef', v]);
+        pq5.enqueue(['Ghweil', n]);
+        pq5.enqueue(['Kholoud', h]);
+        pq5.printCollection();
+      }
+
+      function oursub() {
+        n = n - 1;
+        //alert(" Nash has been assigned " + n + "Ticket(s)" );
+        document.getElementById("TEST5").innerHTML =
+          "Ghweil has been assigned " + n + " Ticket(s)";
+        var points = [x, y, z, v, n, h];
+        document.getElementById("sort").innerHTML = points;
+        var pq5 = new PriorityQueue();
+        pq5.enqueue(['Nash', x]);
+        pq5.enqueue(['Asmaa', y]);
+        pq5.enqueue(['Sherif', z]);
+        pq5.enqueue(['Yousef', v]);
+        pq5.enqueue(['Ghweil', n]);
+        pq5.enqueue(['Kholoud', h]);
+        pq5.printCollection();
+      }
+      
+      function youradd() {
+        h = h + 1;
+        //alert(" Nash has been assigned " + n + "Ticket(s)" );
+        document.getElementById("TEST5").innerHTML =
+          "Kholoud has been assigned " + h + " Ticket(s)";
+        var points = [x, y, z, v, n, h];
+        document.getElementById("sort").innerHTML = points;
+        var pq5 = new PriorityQueue();
+        pq5.enqueue(['Nash', x]);
+        pq5.enqueue(['Asmaa', y]);
+        pq5.enqueue(['Sherif', z]);
+        pq5.enqueue(['Yousef', v]);
+        pq5.enqueue(['Ghweil', n]);
+        pq5.enqueue(['Kholoud', h]);
+        pq5.printCollection();
+      }
+      
+            function yoursub() {
+        h = h - 1;
+        //alert(" Nash has been assigned " + n + "Ticket(s)" );
+        document.getElementById("TEST5").innerHTML =
+          "Kholoud has been assigned " + h + " Ticket(s)";
+        var points = [x, y, z, v, n, h];
+        document.getElementById("sort").innerHTML = points;
+        var pq5 = new PriorityQueue();
+        pq5.enqueue(['Nash', x]);
+        pq5.enqueue(['Asmaa', y]);
+        pq5.enqueue(['Sherif', z]);
+        pq5.enqueue(['Yousef', v]);
+        pq5.enqueue(['Ghweil', n]);
+        pq5.enqueue(['Kholoud', h]);
+        pq5.printCollection();
+      }
+
+
+</script>
+
+  </body>
+
+</html>
